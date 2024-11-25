@@ -1,63 +1,39 @@
 import streamlit as st
-from PIL import Image
-import base64
 
 # Configuración de la página
 st.set_page_config(page_title="Inicio", page_icon="🏠", layout="wide")
 
-# Función para cargar la imagen y convertirla a base64
-def get_image_as_base64(image_path):
-    with open(image_path, "rb") as img_file:
-        return base64.b64encode(img_file.read()).decode()
+# Función para mostrar diferentes páginas según la opción seleccionada
+def main():
+    # Selección de página
+    page = st.selectbox("Selecciona una página", ["Inicio", "Login", "Otro"])
 
-# Ruta de la imagen
-image_path = "assets/imagen.png"  # Asegúrate de que esta ruta sea correcta
+    if page == "Inicio":
+        show_home_page()
+    elif page == "Login":
+        show_login_page()
+    elif page == "Otro":
+        show_other_page()
 
-# Obtener la imagen en base64
-image_base64 = get_image_as_base64(image_path)
+# Página de inicio
+def show_home_page():
+    st.title("Página de Inicio")
+    st.write("Bienvenido a la página principal.")
+    st.button("Ir a Login", on_click=redirect_to_login)
 
-# HTML y CSS para superponer el botón
-st.markdown(
-    f"""
-    <style>
-    .background {{
-        position: relative;
-        text-align: center;
-    }}
-    .background img {{
-        width: 100%;
-        height: auto;
-    }}
-    .button-overlay {{
-        position: absolute;
-        bottom: 50px; /* Ajusta esta distancia desde el fondo */
-        left: 50%;
-        transform: translateX(-50%);
-    }}
-    .button-overlay button {{
-        padding: 15px 32px;
-        font-size: 16px;
-        border-radius: 10px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        cursor: pointer;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: background-color 0.3s ease;
-    }}
-    .button-overlay button:hover {{
-        background-color: #45a049;
-    }}
-    </style>
+# Página de Login
+def show_login_page():
+    st.title("Página de Login")
+    st.write("Esta es la página de login.")
 
-    <div class="background">
-        <img src="data:image/png;base64,{image_base64}" alt="Background">
-        <div class="button-overlay">
-            <a href="/pages/Login" target="_blank"> <!-- Cambié _self por _blank -->
-                <button>Continuar</button>
-            </a>
-        </div>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+# Otra página
+def show_other_page():
+    st.title("Otra Página")
+    st.write("Esto es algo más.")
+
+# Redirección a la página de login
+def redirect_to_login():
+    st.session_state.page = "Login"
+
+if __name__ == "__main__":
+    main()
