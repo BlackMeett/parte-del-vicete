@@ -5,88 +5,74 @@ import base64
 # Configuración de la página
 st.set_page_config(page_title="Inicio", page_icon="🏠", layout="wide")
 
+# Verificar parámetros de consulta
+query_params = st.experimental_get_query_params()
+page = query_params.get("page", ["inicio"])[0]
+
 # Función para cargar la imagen y convertirla a base64
 def get_image_as_base64(image_path):
     with open(image_path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode()
 
-# Ruta de la imagen
-image_path = "assets/imagen.png"  # Asegúrate de que esta ruta sea correcta
+#Eliminar barra lateral, o bloquearla
+hide_sidebar_style = """
+    <style>
+        [data-testid="stSidebar"] {
+            display: none;
+        }
+    </style>
+"""
+st.markdown(hide_sidebar_style, unsafe_allow_html=True)
 
-# Obtener la imagen en base64
+# Ruta de la imagen
+image_path = "imagen.png" 
 image_base64 = get_image_as_base64(image_path)
 
-# Verificar la página actual en la sesión
-if "page" not in st.session_state:
-    st.session_state.page = "inicio"
+# Código HTML y CSS
+st.markdown(
+    f"""
+    <style>
+    .background {{
+        position: relative;
+        text-align: center; /* alineado al centro del contenedor */
+    }}
+    .background img {{
+        width: 100%; 
+        height: auto; /* se ajusta a su ancho maximo, y se ajusta la altura proporcionalmente */
+    }}
+    .button-overlay {{
+        position: absolute;
+        bottom: 50px; 
+        left: 50%;
+        transform: translateX(-50%); /* ajustes varios de posicion para el contenedor del boton */
+    }}
+    .button-overlay button {{
+        padding: 15px 32px;
+        font-size: 16px;
+        border-radius: 10px;
+        background-color: transparent;
+        color: white;
+        border: 2px solid white; /* Borde blanco */
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }}
+    .button-overlay button:hover {{
+        background-color: white;
+        color: black;
+        border-color: black;
+    }}
+    </style>
 
-# Mostrar página de inicio
-if st.session_state.page == "inicio":
-    # HTML y CSS para superponer el botón
-    st.markdown(
-        f"""
-        <style>
-        .background {{
-            position: relative;
-            text-align: center;
-        }}
-        .background img {{
-            width: 100%;
-            height: auto;
-        }}
-        .button-overlay {{
-            position: absolute;
-            bottom: 50px; /* Ajusta esta distancia desde el fondo */
-            left: 50%;
-            transform: translateX(-50%);
-        }}
-        .button-overlay button {{
-            padding: 15px 32px;
-            font-size: 16px;
-            border-radius: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease;
-        }}
-        .button-overlay button:hover {{
-            background-color: #45a049;
-        }}
-        </style>
-
-        <div class="background">
-            <img src="data:image/png;base64,{image_base64}" alt="Background">
-            <div class="button-overlay">
-                <button onclick="window.location.href='/?page=botones'">Continuar</button>
-            </div>
+    <!clase fondo, aca se aplican los estilos css, se carga la imagen en una version apta para la pagina, y se referencia el boton continuar a la pagina login > 
+    <div class="background"> 
+        <img src="data:image/png;base64,{image_base64}" alt="Background">
+        <div class="button-overlay">
+            <a href="/Login" target="_self">
+                <button>Continuar</button>
+            </a>
         </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-    # Redirigir a la página de botones cuando el botón se presione
-    if st.button("Continuar"):
-        st.session_state.page = "botones"
-
-# Página con 3 botones editables
-if st.session_state.page == "botones":
-    st.title("Selecciona una opción")
-
-    # Tres botones editables
-    button_1 = st.button("Botón 1")
-    button_2 = st.button("Botón 2")
-    button_3 = st.button("Botón 3")
-
-    if button_1:
-        st.write("Has seleccionado Botón 1")
-    elif button_2:
-        st.write("Has seleccionado Botón 2")
-    elif button_3:
-        st.write("Has seleccionado Botón 3")
-
-    # Volver a la página de inicio
-    if st.button("Volver al Inicio"):
-        st.session_state.page = "inicio"
-
+    </div>
+    """,
+    unsafe_allow_html=True
+)
