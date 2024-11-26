@@ -25,7 +25,7 @@ hide_sidebar_style = """
 st.markdown(hide_sidebar_style, unsafe_allow_html=True)
 
 # Ruta de la imagen
-image_path = "imagen.png" 
+image_path = "assets/imagen.png" 
 image_base64 = get_image_as_base64(image_path)
 
 # Código HTML y CSS
