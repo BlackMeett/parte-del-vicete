@@ -68,7 +68,7 @@ st.markdown(
     <div class="background"> 
         <img src="data:image/png;base64,{image_base64}" alt="Background">
         <div class="button-overlay">
-            <a href="pages/login.py" target="_self">
+            <a href="/login" target="_self">
                 <button>Continuar</button>
             </a>
         </div>
