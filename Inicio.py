@@ -16,7 +16,7 @@ image_path = "assets/imagen.png"  # Asegúrate de que esta ruta sea correcta
 # Obtener la imagen en base64
 image_base64 = get_image_as_base64(image_path)
 
-# Página principal con el botón Continuar
+# Verificar la página actual en la sesión
 if "page" not in st.session_state:
     st.session_state.page = "inicio"
 
@@ -66,6 +66,10 @@ if st.session_state.page == "inicio":
         unsafe_allow_html=True
     )
 
+    # Redirigir a la página de botones cuando el botón se presione
+    if st.button("Continuar"):
+        st.session_state.page = "botones"
+
 # Página con 3 botones editables
 if st.session_state.page == "botones":
     st.title("Selecciona una opción")
@@ -85,3 +89,4 @@ if st.session_state.page == "botones":
     # Volver a la página de inicio
     if st.button("Volver al Inicio"):
         st.session_state.page = "inicio"
+
