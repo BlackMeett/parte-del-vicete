@@ -82,5 +82,3 @@ elif st.session_state.page == "pagina_con_botones":
     # Opción para volver a la página inicial
     if st.button("Volver al inicio"):
         st.session_state.page = "inicio"
-
-        
