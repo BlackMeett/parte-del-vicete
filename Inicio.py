@@ -82,45 +82,45 @@ def show_home_page():
     if st.button("Continuar"):
         st.session_state.page = "pagina2"
 
-# Página 2 con 3 botones
-def show_page2():
-    st.title("Página 2")
-    st.write("Aquí tienes tres botones que puedes personalizar:")
-
-    # Botones personalizables
-    button_1_text = st.text_input("Texto del primer botón", "Ir a Página 3")
-    button_2_text = st.text_input("Texto del segundo botón", "Ir a Página 4")
-    button_3_text = st.text_input("Texto del tercer botón", "Acción Personalizada")
-
-    if st.button(button_1_text):
-        st.session_state.page = "pagina3"
-    elif st.button(button_2_text):
-        st.session_state.page = "pagina4"
-    elif st.button(button_3_text):
-        st.write("¡Has presionado el tercer botón! Puedes personalizar esta acción.")
-    
-    # Botón para regresar a la página principal
-    if st.button("Volver a la página principal"):
-        st.session_state.page = "inicio"
-
-# Página 3
-def show_page3():
-    st.title("Página 3")
-    st.write("Esta es la página 3. Puedes agregar más contenido aquí.")
-    
-    # Botón para regresar
-    if st.button("Volver a la página 2"):
-        st.session_state.page = "pagina2"
-
-# Página 4
-def show_page4():
-    st.title("Página 4")
-    st.write("Esta es la página 4. Puedes agregar más contenido aquí también.")
-    
-    # Botón para regresar
-    if st.button("Volver a la página 2"):
-        st.session_state.page = "pagina2"
-
-if __name__ == "__main__":
-    main()
-
+        # Página 2 con 3 botones
+        def show_page2():
+            st.title("Página 2")
+            st.write("Aquí tienes tres botones que puedes personalizar:")
+        
+            # Botones personalizables
+            button_1_text = st.text_input("Texto del primer botón", "Ir a Página 3")
+            button_2_text = st.text_input("Texto del segundo botón", "Ir a Página 4")
+            button_3_text = st.text_input("Texto del tercer botón", "Acción Personalizada")
+        
+            if st.button(button_1_text):
+                st.session_state.page = "pagina3"
+            elif st.button(button_2_text):
+                st.session_state.page = "pagina4"
+            elif st.button(button_3_text):
+                st.write("¡Has presionado el tercer botón! Puedes personalizar esta acción.")
+            
+            # Botón para regresar a la página principal
+            if st.button("Volver a la página principal"):
+                st.session_state.page = "inicio"
+        
+        # Página 3
+        def show_page3():
+            st.title("Página 3")
+            st.write("Esta es la página 3. Puedes agregar más contenido aquí.")
+            
+            # Botón para regresar
+            if st.button("Volver a la página 2"):
+                st.session_state.page = "pagina2"
+        
+        # Página 4
+        def show_page4():
+            st.title("Página 4")
+            st.write("Esta es la página 4. Puedes agregar más contenido aquí también.")
+            
+            # Botón para regresar
+            if st.button("Volver a la página 2"):
+                st.session_state.page = "pagina2"
+        
+        if __name__ == "__main__":
+            main()
+        
