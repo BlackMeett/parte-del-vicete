@@ -16,12 +16,13 @@ image_path = "assets/imagen.png"  # Asegúrate de que esta ruta sea correcta
 # Obtener la imagen en base64
 image_base64 = get_image_as_base64(image_path)
 
-# Configuración inicial para la navegación
+# Página principal con el botón Continuar
 if "page" not in st.session_state:
-    st.session_state.page = "inicio"  # Página inicial
+    st.session_state.page = "inicio"
 
-# Página de inicio
+# Mostrar página de inicio
 if st.session_state.page == "inicio":
+    # HTML y CSS para superponer el botón
     st.markdown(
         f"""
         <style>
@@ -58,27 +59,29 @@ if st.session_state.page == "inicio":
         <div class="background">
             <img src="data:image/png;base64,{image_base64}" alt="Background">
             <div class="button-overlay">
-                <a href="#" onclick="window.location.reload()">
-                    <button>Continuar</button>
-                </a>
+                <button onclick="window.location.href='/?page=botones'">Continuar</button>
             </div>
         </div>
         """,
         unsafe_allow_html=True
     )
 
-    # Acción de continuar
-    if st.button("Continuar"):
-        st.session_state.page = "pagina_con_botones"
+# Página con 3 botones editables
+if st.session_state.page == "botones":
+    st.title("Selecciona una opción")
 
-# Página con los tres botones
-elif st.session_state.page == "pagina_con_botones":
-    st.title("Página con 3 Botones")
+    # Tres botones editables
+    button_1 = st.button("Botón 1")
+    button_2 = st.button("Botón 2")
+    button_3 = st.button("Botón 3")
 
-    st.button("Botón 1")
-    st.button("Botón 2")
-    st.button("Botón 3")
+    if button_1:
+        st.write("Has seleccionado Botón 1")
+    elif button_2:
+        st.write("Has seleccionado Botón 2")
+    elif button_3:
+        st.write("Has seleccionado Botón 3")
 
-    # Opción para volver a la página inicial
-    if st.button("Volver al inicio"):
+    # Volver a la página de inicio
+    if st.button("Volver al Inicio"):
         st.session_state.page = "inicio"
