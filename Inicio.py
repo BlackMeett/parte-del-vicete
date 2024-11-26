@@ -71,7 +71,7 @@ def show_home_page():
         <div class="background">
             <img src="data:image/png;base64,{image_base64}" alt="Background">
             <div class="button-overlay">
-                <button>Continuar</button>
+                <button onClick="window.location.href = '#';">Continuar</button>
             </div>
         </div>
         """,
